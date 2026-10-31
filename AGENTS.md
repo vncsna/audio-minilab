@@ -44,20 +44,17 @@ Do not install packages, do not run `sudo`, and do not change audio/DAW configur
 |---|---|---|
 | `AGENTS.md` | course rules, environment, method | agent |
 | `GUIDE.md` | roadmap + objective progress ("where I am") | agent updates |
-| `JOURNAL.md` | subjective diary ("how I'm living it") | student (agent only formats) |
 | `GLOSSARY.md` | translated terms | agent (create when needed) |
 
 ## File rules
 
-- **Language: English for everything written to disk** — these files, `GUIDE.md`, `JOURNAL.md`, `GLOSSARY.md`, commit messages, code. The spoken/written conversation with the student stays in Brazilian Portuguese.
+- **Language: English for everything written to disk** — these files, `GUIDE.md`, `GLOSSARY.md`, commit messages, code. The spoken/written conversation with the student stays in Brazilian Portuguese.
 - **`GUIDE.md` is the single source of truth for progress.** If it isn't there, it didn't happen.
 - **Every lesson session ends with a `GUIDE.md` update**, always:
   1. tick the `[x]` boxes of completed lessons;
   2. update the **Current state** block (progress, date, next lesson, blockers);
   3. add **one row** to `Session log` (date, what was done, what blocked);
   4. never delete completed steps or rewrite history — only append.
-- **`JOURNAL.md`:** new entry **at the top**, dated `## YYYY-MM-DD — title`. Never modify old
-  entries. The student reports what they felt; the agent does not invent emotion.
 - Small, clear commits (e.g. `docs: translate course files to english`). The repository is private:
   `github.com/vncsna/audio-minilab`.
 - You may **append** new modules at the end of the roadmap. **Reordering or removing** only on the student's explicit request.
