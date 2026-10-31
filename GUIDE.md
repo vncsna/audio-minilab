@@ -41,7 +41,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
 - [x] **0.2 — See the messages arriving**
   - **Concept:** MIDI is a list of messages (`note on`, `note off`, `velocity`, `CC`).
-  - **Exercise:** `sudo pacman -S alsa-utils && aseqdump -p 16:0`; press keys, turn knobs,
+  - **Exercise:** `paru -S alsa-utils && aseqdump -p 16:0`; press keys, turn knobs,
     hit pads and identify in the terminal: note, velocity, CC.
   - **Criterion:** you can tell from the terminal output the difference between pressing a key and turning a knob.
 

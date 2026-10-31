@@ -18,9 +18,11 @@ This directory is a **personal 1:1 course**. Read this file before anything else
 | Controller | Arturia MiniLab 3 — USB `1c75:020b`, ALSA card 0 |
 | MIDI ports | `Minilab3: MIDI`, `DIN THRU`, `MCU/HUI`, `ALV` (exposed via PipeWire's `Midi-Bridge`) |
 | Instruments | `fluidsynth` installed; no VSTs yet |
+| Package manager | `pacman`, plus **`paru`** as the AUR helper (the student's choice) — suggest `paru -S <pkg>` / `paru -Sua`, never plain `pacman` for AUR packages |
 | Limitation | **MIDI Control Center and Analog Lab have no native Linux build** |
 
 Do not install packages, do not run `sudo`, and do not change audio/DAW configuration without asking.
+When a lesson needs a package, give the exact `paru` command and let the student run it.
 
 ## How to teach
 
