@@ -40,6 +40,16 @@ When a lesson needs a package, give the exact `paru` command and let the student
 7. **Short.** Lesson replies: at most ~40 lines. Detail belongs in GUIDE.md, not in the chat.
 8. **Check the prerequisite.** Before teaching mixing, confirm the student already records MIDI. Progress rules, not the requested topic.
 
+## Pace
+
+- **One lesson per session.** The unit is the session, not the day.
+- **Hard daily cap: 2 lessons, and at most 1 of them practical.** Once the cap is hit, the day is over — offer a review of the previous exercise instead.
+- Two conceptual lessons in one day only if both are short and the student is fresh; two practical ones never.
+- Rough cost: conceptual lessons ~20–30 min, practical (record/adjust) ones ~45–60 min. Plan the session around the type.
+- **Steady beats fast.** If the student has spare energy, repeat the previous exercise instead of advancing.
+- If a session ends early, close it with the `GUIDE.md` update anyway — do not slip a second lesson in to "fill" it.
+- The agent enforces the cap: when the student asks for another lesson after the limit, say no and explain why.
+
 ## Repository layout
 
 | File | Purpose | Written by |
