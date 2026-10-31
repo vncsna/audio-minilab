@@ -1,169 +1,169 @@
-# GUIDE.md — Do zero à primeira música (MiniLab 3 + Reaper + Linux)
+# GUIDE.md — From zero to a first track (MiniLab 3 + Reaper + Linux)
 
-> Documento **vivo**. Ele é o mapa do curso e o diário de bordo: mostra onde você está,
-> o que já foi concluído e qual é o próximo passo. O agente atualiza ao fim de cada aula.
-> Regras de atualização estão no fim do arquivo.
+> **Living document.** It is both the course map and the logbook: it shows where you are,
+> what is done, and what the next step is. The agent updates it at the end of every lesson.
+> Update rules are at the bottom of this file.
 
 ---
 
-## Estado atual
+## Current state
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Progresso** | `0 / 18` lições |
-| **Nível** | 0 — começando do zero |
-| **Última sessão** | — (nada registrado ainda) |
-| **Próxima lição** | **0.1 — Checar se o teclado está falando com o sistema** |
-| **Bloqueios** | nenhum |
-| **Meta final** | compor, mixar e exportar 1 faixa própria (~3 min), sozinho |
+| **Progress** | `0 / 18` lessons |
+| **Level** | 0 — starting from scratch |
+| **Last session** | — (nothing recorded yet) |
+| **Next lesson** | **0.1 — Check that the keyboard talks to the system** |
+| **Blockers** | none |
+| **Final goal** | compose, mix, and export 1 original track (~3 min), on your own |
 
-**Como retomar:** leia este bloco → veja a próxima lição na trilha → faça só ela.
+**How to resume:** read this block → find the next lesson in the roadmap → do only that one.
 
 ---
 
-## Trilha de aprendizado
+## Learning roadmap
 
-Legenda: `[ ]` pendente · `[~]` em andamento · `[x]` concluída
+Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
-### Módulo 0 — Fundação: o teclado conversando com o sistema (2 lições)
+### Module 0 — Foundation: the keyboard talking to the system (2 lessons)
 
-**Objetivo:** saber que o MiniLab 3 manda MIDI de verdade e onde isso é visível.
+**Goal:** know that the MiniLab 3 really sends MIDI, and where that is visible.
 
-- [ ] **0.1 — Diagnóstico do teclado**
-  - **Conceito:** o MiniLab 3 é um controlador MIDI (não faz som). O Linux já o reconhece sem driver.
-  - **Exercício:** com o teclado plugado, rodar
+- [ ] **0.1 — Keyboard diagnostics**
+  - **Concept:** the MiniLab 3 is a MIDI controller (it makes no sound). Linux already recognizes it, no driver needed.
+  - **Exercise:** with the keyboard plugged in, run
     ```bash
     cat /proc/asound/seq/clients
     pw-link -o | grep -i minilab
     ```
-    e reconhecer as 4 portas (`MIDI`, `DIN THRU`, `MCU/HUI`, `ALV`).
-  - **Critério:** você sabe apontar qual cliente/porta é o teclado.
+    and recognize the 4 ports (`MIDI`, `DIN THRU`, `MCU/HUI`, `ALV`).
+  - **Criterion:** you can point out which client/port is the keyboard.
 
-- [ ] **0.2 — Ver as mensagens chegando**
-  - **Conceito:** MIDI é uma lista de mensagens (`nota ligada`, `nota desligada`, `velocity`, `CC`).
-  - **Exercício:** `sudo pacman -S alsa-utils && aseqdump -p 16:0`; apertar teclas, girar knobs,
-    bater pads e identificar no terminal: nota, velocity, CC.
-  - **Critério:** você reconhece no terminal a diferença entre apertar tecla e girar knob.
+- [ ] **0.2 — See the messages arriving**
+  - **Concept:** MIDI is a list of messages (`note on`, `note off`, `velocity`, `CC`).
+  - **Exercise:** `sudo pacman -S alsa-utils && aseqdump -p 16:0`; press keys, turn knobs,
+    hit pads and identify in the terminal: note, velocity, CC.
+  - **Criterion:** you can tell from the terminal output the difference between pressing a key and turning a knob.
 
-### Módulo 1 — MIDI e o MiniLab 3 (3 lições)
+### Module 1 — MIDI and the MiniLab 3 (3 lessons)
 
-- [ ] **1.1 — Mapa do hardware**
-  - **Conceito:** 25 teclas, 8 pads (2 bancos), 4 faders, 8 knobs, touch strips (pitch/mod),
-    `Octave`, `Hold`, `Shift`, arpejador, display OLED.
-  - **Exercício:** tocar cada controle e nomear o que ele faz; descobrir o que `Shift` modifica.
-  - **Critério:** você acha octave, hold, arp e troca de banco dos pads sem olhar o manual.
+- [ ] **1.1 — Hardware map**
+  - **Concept:** 25 keys, 8 pads (2 banks), 4 faders, 8 knobs, touch strips (pitch/mod),
+    `Octave`, `Hold`, `Shift`, arpeggiator, OLED display.
+  - **Exercise:** touch every control and name what it does; find out what `Shift` modifies.
+  - **Criterion:** you can find octave, hold, arp, and pad bank switching without the manual.
 
-- [ ] **1.2 — O que é velocity, aftertouch e CC**
-  - **Conceito:** velocity = intensidade; aftertouch = pressão depois de apertar; CC = controle contínuo.
-  - **Exercício:** tocar a mesma nota suave e forte e comparar o número de velocity no `aseqdump`.
-  - **Critério:** você explica por que a mesma nota "soa diferente" conforme a força.
+- [ ] **1.2 — What velocity, aftertouch, and CC are**
+  - **Concept:** velocity = intensity; aftertouch = pressure after pressing; CC = continuous control.
+  - **Exercise:** play the same note soft and hard and compare the velocity number in `aseqdump`.
+  - **Criterion:** you can explain why the same note "sounds different" depending on force.
 
-- [ ] **1.3 — MIDI não é áudio**
-  - **Conceito:** MIDI descreve *o que tocar*; o som vem de um instrumento virtual (VSTi).
-  - **Exercício:** desenhar (papel/mente) a corrente: MiniLab → Reaper → VSTi → alto-falante.
-  - **Critério:** você sabe que trocar o instrumento muda o som sem mudar o MIDI.
+- [ ] **1.3 — MIDI is not audio**
+  - **Concept:** MIDI describes *what to play*; the sound comes from a virtual instrument (VSTi).
+  - **Exercise:** draw (on paper/in your head) the chain: MiniLab → Reaper → VSTi → speaker.
+  - **Criterion:** you know that changing the instrument changes the sound without changing the MIDI.
 
-### Módulo 2 — Primeiro som no Reaper (2 lições)
+### Module 2 — First sound in Reaper (2 lessons)
 
-- [ ] **2.1 — Configurar o Reaper**
-  - **Conceito:** entrada MIDI, dispositivo de áudio, buffer e latência.
-  - **Exercício:** `Options → Preferences → MIDI Devices`: habilitar `Minilab3: MIDI (capture)`.
-    Conferir `Audio → Device` (ALSA/JACK) e tocar com latência confortável.
-  - **Critério:** tecla acesa na track = som imediato, sem clique duplo nem atraso incômodo.
+- [ ] **2.1 — Configure Reaper**
+  - **Concept:** MIDI input, audio device, buffer, and latency.
+  - **Exercise:** `Options → Preferences → MIDI Devices`: enable `Minilab3: MIDI (capture)`.
+    Check `Audio → Device` (ALSA/JACK) and play with comfortable latency.
+  - **Criterion:** key light on the track = immediate sound, no double trigger, no annoying delay.
 
-- [ ] **2.2 — Primeira nota gravada**
-  - **Conceito:** track armada + `Record: input (audio or MIDI)` + monitor.
-  - **Exercício:** inserir um VSTi (Surge XT, Vital ou Dexed), gravar 4 compassos de notas soltas
-    e ver os eventos no MIDI Editor.
-  - **Critério:** existe um item MIDI com notas suas no projeto.
+- [ ] **2.2 — First recorded note**
+  - **Concept:** armed track + `Record: input (audio or MIDI)` + monitoring.
+  - **Exercise:** insert a VSTi (Surge XT, Vital, or Dexed), record 4 bars of loose notes,
+    and see the events in the MIDI Editor.
+  - **Criterion:** there is a MIDI item with your notes in the project.
 
-### Módulo 3 — Ritmo: pads e bateria (2 lições)
+### Module 3 — Rhythm: pads and drums (2 lessons)
 
-- [ ] **3.1 — Bateria com os pads**
-  - **Conceito:** mapa de notas do General MIDI (kick 36, snare 38, closed hat 42…).
-  - **Exercício:** gravar um groove de 2 compassos (kick/snare/hat) usando os pads.
-  - **Critério:** o groove fica no tempo, com pelo menos 3 peças.
+- [ ] **3.1 — Drums with the pads**
+  - **Concept:** General MIDI note map (kick 36, snare 38, closed hat 42…).
+  - **Exercise:** record a 2-bar groove (kick/snare/hat) using the pads.
+  - **Criterion:** the groove is in time, with at least 3 pieces.
 
-- [ ] **3.2 — Grid, quantização e humanização**
-  - **Conceito:** quantizar = alinhar à grade; 100% soa robótico.
-  - **Exercício:** quantizar a bateria em 60–80% de força e comparar com 100%.
-  - **Critério:** você escolhe conscientemente a intensidade do quantize.
+- [ ] **3.2 — Grid, quantization, and humanization**
+  - **Concept:** quantize = align to the grid; 100% sounds robotic.
+  - **Exercise:** quantize the drums at 60–80% strength and compare with 100%.
+  - **Criterion:** you consciously choose the quantize strength.
 
-### Módulo 4 — Harmonia mínima aplicada (2 lições)
+### Module 4 — Applied minimal harmony (2 lessons)
 
-- [ ] **4.1 — Escala e tríades**
-  - **Conceito:** escala maior/menor, intervalos, tríade (tônica–terça–quinta).
-  - **Exercício:** tocar a tríade de Dó maior e de Lá menor no MiniLab.
-  - **Critério:** você monta qualquer tríade maior/menor a partir da tônica.
+- [ ] **4.1 — Scale and triads**
+  - **Concept:** major/minor scale, intervals, triad (root–third–fifth).
+  - **Exercise:** play the C major and A minor triads on the MiniLab.
+  - **Criterion:** you can build any major/minor triad from its root.
 
-- [ ] **4.2 — Progressão de 4 acordes**
-  - **Conceito:** graus, progressão I–V–vi–IV e por que ela "cola".
-  - **Exercício:** gravar a progressão com um pad/keys e fazer o loop tocar.
-  - **Critério:** loop de 4 acordes gravado, afinado e no tempo.
+- [ ] **4.2 — Four-chord progression**
+  - **Concept:** scale degrees, the I–V–vi–IV progression, and why it "sticks".
+  - **Exercise:** record the progression with a pad/keys and loop it.
+  - **Criterion:** a 4-chord loop recorded, in tune, and in time.
 
-### Módulo 5 — Arranjo e forma (2 lições)
+### Module 5 — Arrangement and form (2 lessons)
 
-- [ ] **5.1 — Estrutura de uma faixa**
-  - **Conceito:** intro, verso, refrão, ponte, outro; contagem em compassos (4/8/16).
-  - **Exercício:** montar um "mapa" de 2 min no papel para a sua faixa.
-  - **Critério:** mapa com seções e duração definidos.
+- [ ] **5.1 — Track structure**
+  - **Concept:** intro, verse, chorus, bridge, outro; counting in bars (4/8/16).
+  - **Exercise:** build a 2-minute "map" on paper for your track.
+  - **Criterion:** map with sections and durations defined.
 
-- [ ] **5.2 — Camadas: baixo, harmonia, melodia**
-  - **Conceito:** papéis (grave/médio/agudo) e como evitar disputa de frequência.
-  - **Exercício:** acrescentar baixo (mono) e uma melodia simples sobre o loop.
-  - **Critério:** três camadas soando distintas, sem mascarar uma à outra.
+- [ ] **5.2 — Layers: bass, harmony, melody**
+  - **Concept:** roles (low/mid/high) and how to avoid frequency clashes.
+  - **Exercise:** add a bass (mono) and a simple melody over the loop.
+  - **Criterion:** three layers sounding distinct, none masking another.
 
-### Módulo 6 — Mixagem básica (2 lições)
+### Module 6 — Basic mixing (2 lessons)
 
-- [ ] **6.1 — Volume, pan e espaço**
-  - **Conceito:** gain staging (picos ~-6 dB), pan, hierarquia de volumes.
-  - **Exercício:** equilibrar a faixa com faders, sem nenhum plugin.
-  - **Critério:** mix soa equilibrado em volume baixo e alto.
+- [ ] **6.1 — Volume, pan, and space**
+  - **Concept:** gain staging (peaks ~-6 dB), pan, volume hierarchy.
+  - **Exercise:** balance the track with faders, no plugins at all.
+  - **Criterion:** the mix sounds balanced at both low and high volume.
 
-- [ ] **6.2 — EQ, compressão e reverb (o mínimo)**
-  - **Conceito:** cortar antes de realçar; compressão controla dinâmica; reverb cria espaço.
-  - **Exercício:** cortar graves do pad, comprimir o baixo e mandar um reverb curto na melodia.
-  - **Critério:** você justifica cada plugin que colocou.
+- [ ] **6.2 — EQ, compression, and reverb (the minimum)**
+  - **Concept:** cut before boosting; compression controls dynamics; reverb creates space.
+  - **Exercise:** cut the pad's low end, compress the bass, and send a short reverb to the melody.
+  - **Criterion:** you can justify every plugin you inserted.
 
-### Módulo 7 — Finalização (2 lições)
+### Module 7 — Finishing (2 lessons)
 
-- [ ] **7.1 — Referência e loudness**
-  - **Conceito:** comparar com faixa comercial, LUFS integrado, true peak.
-  - **Exercício:** analisar sua faixa e a referência com medidor; ajustar nível.
-  - **Critério:** faixa em volume competitivo sem distorcer.
+- [ ] **7.1 — Reference and loudness**
+  - **Concept:** compare against a commercial track, integrated LUFS, true peak.
+  - **Exercise:** analyze your track and the reference with a meter; adjust level.
+  - **Criterion:** track at competitive volume without distortion.
 
-- [ ] **7.2 — Exportar**
-  - **Conceito:** WAV 24-bit para master, MP3 para ouvir no celular.
-  - **Exercício:** render na região certa e conferir o arquivo final.
-  - **Critério:** arquivo exportado, ouvido do início ao fim e aprovado.
+- [ ] **7.2 — Export**
+  - **Concept:** 24-bit WAV for the master, MP3 for listening on the phone.
+  - **Exercise:** render the correct region and check the final file.
+  - **Criterion:** file exported, listened to from start to finish, and approved.
 
-### Módulo 8 — Depois da primeira faixa (1 lição)
+### Module 8 — After the first track (1 lesson)
 
-- [ ] **8.1 — Próximos caminhos**
-  - **Conceito:** sound design, gravação de voz/instrumento, colaboração, MIDI Learn avançado.
-  - **Exercício:** escolher o próximo foco e escrever 3 metas.
-  - **Critério:** metas escritas no fim deste arquivo.
+- [ ] **8.1 — Next paths**
+  - **Concept:** sound design, recording voice/instruments, collaboration, advanced MIDI Learn.
+  - **Exercise:** choose the next focus and write 3 goals.
+  - **Criterion:** goals written at the bottom of this file.
 
 ---
 
-## Registro de sessões
+## Session log
 
-| Data | Lição | O que foi feito | Travou? |
+| Date | Lesson | What was done | Blocked? |
 |---|---|---|---|
-| — | — | Curso criado; nenhuma aula dada ainda | — |
+| — | — | Course created; no lesson taught yet | — |
 
 ---
 
-## Anotações do aluno
+## Student notes
 
-_(espaço livre — dúvidas, referências musicais, ideias de faixa)_
+_(free space — questions, music references, track ideas)_
 
 ---
 
-## Regras de atualização deste documento
+## Update rules for this document
 
-1. Ao concluir uma lição: trocar `[ ]` por `[x]`.
-2. Atualizar a tabela **Estado atual** (progresso, data, próxima lição, bloqueios).
-3. Acrescentar uma linha em **Registro de sessões** — nunca editar linhas antigas.
-4. Novas lições entram **no fim do módulo correspondente**; novos módulos, no fim da trilha.
-5. Se uma lição for pulada, justificar na coluna "O que foi feito".
+1. When a lesson is completed: replace `[ ]` with `[x]`.
+2. Update the **Current state** table (progress, date, next lesson, blockers).
+3. Add one row to **Session log** — never edit old rows.
+4. New lessons go **at the end of the matching module**; new modules go at the end of the roadmap.
+5. If a lesson is skipped, justify it in the "What was done" column.

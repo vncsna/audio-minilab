@@ -1,59 +1,59 @@
-# JOURNAL.md — Diário de aprendizado
+# JOURNAL.md — Learning diary
 
-Registro **pessoal e subjetivo** da jornada com o MiniLab 3. Aqui vale escrever o que sentiu,
-o que confundiu, o que deu orgulho — coisas que não cabem na tabela objetiva do `GUIDE.md`.
+A **personal, subjective** record of the journey with the MiniLab 3. Here you write what you felt,
+what confused you, what made you proud — things that don't fit the objective table in `GUIDE.md`.
 
-**Enquanto o `GUIDE.md` responde "em que passo estou?", o `JOURNAL.md` responde "como estou vivendo isso?".**
+**`GUIDE.md` answers "what step am I on?"; `JOURNAL.md` answers "how am I living this?"**
 
-## Como escrever
+## How to write
 
-- **Entradas mais novas no topo.**
-- Uma entrada por sessão de estudo (ou por dia, se houver mais de uma).
-- Sempre com data no formato `## AAAA-MM-DD — título curto`.
-- Pode ser em tópicos. Não precisa ser bonito, precisa ser honesto.
-- Nunca reescreva entradas antigas. Se mudou de ideia, escreva uma nova entrada citando a anterior.
-- **O aluno escreve o conteúdo.** O agente pode ajudar a formatar, mas não inventa sensações.
+- **Newest entries at the top.**
+- One entry per study session (or per day, if there is more than one).
+- Always dated in the format `## YYYY-MM-DD — short title`.
+- Bullet points are fine. It doesn't need to be pretty, it needs to be honest.
+- Never rewrite old entries. If you changed your mind, write a new entry referring to the previous one.
+- **The student writes the content.** The agent may help format it, but never invents feelings.
 
-### Modelo de entrada
+### Entry template
 
 ```markdown
-## AAAA-MM-DD — título curto
+## YYYY-MM-DD — short title
 
-**Lição:** 0.1
-**Tempo:** ~20 min
-**O que fiz:** ...
-**O que entendi:** ...
-**O que travou / ficou confuso:** ...
-**Sensação:** (empolgado / perdido / travado / divertido)
-**Vontade para a próxima:** ...
+**Lesson:** 0.1
+**Time:** ~20 min
+**What I did:** ...
+**What I understood:** ...
+**What blocked / stayed confusing:** ...
+**Feeling:** (excited / lost / stuck / fun)
+**Wish for next time:** ...
 ```
 
 ---
 
-## 2026-10-31 — Dia zero: o teclado já fala, eu ainda não
+## 2026-10-31 — Day zero: the keyboard already speaks, I don't yet
 
-**Lição:** nenhuma ainda (curso criado hoje)
-**Tempo:** ~1 h montando o ambiente
+**Lesson:** none yet (course created today)
+**Time:** ~1 h setting up the environment
 
-**O que fiz:**
-- Pluguei o MiniLab 3 no ThinkPad e descobri que o Linux já reconhece sem instalar nada.
-- Vi as quatro portas que o teclado expõe (`MIDI`, `DIN THRU`, `MCU/HUI`, `ALV`) e não entendi
-  metade dos nomes.
-- Tentei habilitar a superfície de controle no Reaper e levei um
+**What I did:**
+- Plugged the MiniLab 3 into the ThinkPad and found out Linux recognizes it with nothing installed.
+- Saw the four ports the keyboard exposes (`MIDI`, `DIN THRU`, `MCU/HUI`, `ALV`) and didn't understand
+  half the names.
+- Tried to enable the control surface in Reaper and got a
   `Control Surface: Error opening MIDI inputs`.
-- Limpamos a lista de MIDI do Reaper, que tinha dezenas de entradas fantasmas.
+- We cleared Reaper's MIDI list, which had dozens of phantom entries.
 
-**O que entendi:**
-- O teclado não faz som: ele só manda mensagens. O som vem do instrumento virtual dentro do DAW.
-- "Midi-Bridge" é o PipeWire fazendo ponte entre o teclado e os programas.
-- MCU/HUI é um protocolo para controlar o DAW (faders, transporte), separado do MIDI de notas.
+**What I understood:**
+- The keyboard makes no sound: it only sends messages. The sound comes from the virtual instrument inside the DAW.
+- "Midi-Bridge" is PipeWire bridging the keyboard and the programs.
+- MCU/HUI is a protocol for controlling the DAW (faders, transport), separate from note MIDI.
 
-**O que travou / ficou confuso:**
-- A quantidade de nomes parecidos nas listas de MIDI.
-- Ainda não sei o que `ALV` e `DIN THRU` fazem na prática.
-- Não sei se vou usar os faders para mixar ou se é complicação demais no começo.
+**What blocked / stayed confusing:**
+- The sheer number of similar-looking names in the MIDI lists.
+- I still don't know what `ALV` and `DIN THRU` do in practice.
+- I don't know whether I'll use the faders to mix or whether that's too much complexity for the start.
 
-**Sensação:** empolgado, mas com a impressão de que tem muita sigla entre mim e o som.
+**Feeling:** excited, but with the impression that there are a lot of acronyms between me and the sound.
 
-**Vontade para a próxima:** apertar uma tecla e vê-la virar som dentro do Reaper, sem
-configuração nenhuma no meio do caminho.
+**Wish for next time:** press a key and see it turn into sound inside Reaper, with no configuration
+in the way.
