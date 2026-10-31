@@ -10,10 +10,10 @@
 
 | Field | Value |
 |---|---|
-| **Progress** | `0 / 18` lessons |
+| **Progress** | `3 / 18` lessons |
 | **Level** | 0 — starting from scratch |
-| **Last session** | — (nothing recorded yet) |
-| **Next lesson** | **0.1 — Check that the keyboard talks to the system** |
+| **Last session** | 2026-10-31 — lessons 0.1, 0.2 and 1.1 (diagnostics, live MIDI messages, hardware map) |
+| **Next lesson** | **1.2 — What velocity, aftertouch, and CC are** |
 | **Blockers** | none |
 | **Final goal** | compose, mix, and export 1 original track (~3 min), on your own |
 
@@ -29,7 +29,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
 **Goal:** know that the MiniLab 3 really sends MIDI, and where that is visible.
 
-- [ ] **0.1 — Keyboard diagnostics**
+- [x] **0.1 — Keyboard diagnostics**
   - **Concept:** the MiniLab 3 is a MIDI controller (it makes no sound). Linux already recognizes it, no driver needed.
   - **Exercise:** with the keyboard plugged in, run
     ```bash
@@ -39,7 +39,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
     and recognize the 4 ports (`MIDI`, `DIN THRU`, `MCU/HUI`, `ALV`).
   - **Criterion:** you can point out which client/port is the keyboard.
 
-- [ ] **0.2 — See the messages arriving**
+- [x] **0.2 — See the messages arriving**
   - **Concept:** MIDI is a list of messages (`note on`, `note off`, `velocity`, `CC`).
   - **Exercise:** `sudo pacman -S alsa-utils && aseqdump -p 16:0`; press keys, turn knobs,
     hit pads and identify in the terminal: note, velocity, CC.
@@ -47,11 +47,16 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
 ### Module 1 — MIDI and the MiniLab 3 (3 lessons)
 
-- [ ] **1.1 — Hardware map**
+- [x] **1.1 — Hardware map**
   - **Concept:** 25 keys, 8 pads (2 banks), 4 faders, 8 knobs, touch strips (pitch/mod),
     `Octave`, `Hold`, `Shift`, arpeggiator, OLED display.
   - **Exercise:** touch every control and name what it does; find out what `Shift` modifies.
   - **Criterion:** you can find octave, hold, arp, and pad bank switching without the manual.
+  - **Findings (verified):** one octave = 12 semitones; `Shift` + `Octave` = transpose (semitones,
+    not octaves); `Shift` + arp button = arpeggiator; `Shift` + pad 2 = pad bank switch, signalled by
+    `CC 27` (127/0) plus an Arturia SysEx message; pads send on channel 9 with notes 36–43 (bank A)
+    and 44–51 (bank B); keys send on channel 0; button presses appear as `CC 105–109` at 127/0;
+    `Shift` also produces Arturia SysEx (`F0 00 20 6B …`).
 
 - [ ] **1.2 — What velocity, aftertouch, and CC are**
   - **Concept:** velocity = intensity; aftertouch = pressure after pressing; CC = continuous control.
@@ -151,6 +156,9 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 | Date | Lesson | What was done | Blocked? |
 |---|---|---|---|
 | — | — | Course created; no lesson taught yet | — |
+| 2026-10-31 | 0.1 | Identified the keyboard as ALSA client 16 with 4 ports (0–3); learned `cat /proc/asound/seq/clients` and `pw-link -o \| grep -i minilab`; mapped the role of `MIDI`, `DIN THRU`, `MCU/HUI`, `ALV` | — |
+| 2026-10-31 | 0.2 | Installed `alsa-utils` and used `aseqdump -p 16:0`; saw note on/off with velocity (60 soft vs 96–99 hard), CC 74 from the first knob, CC 1 from the mod strip, and pitch bend centered on 0; distinguished discrete events from continuous streams | — |
+| 2026-10-31 | 1.1 | Mapped the surface with `aseqdump`: 12 semitones per octave, `Shift`+`Octave` = transpose, `Shift`+arp = arpeggiator, `Shift`+pad 2 = pad bank (`CC 27`). Verified pad 1 = note 44 in bank B and 36 in bank A; pads send on channel 9, keys on channel 0 | Arp pattern looked like a repeated held triad with identical velocities; definitive on/off comparison deferred to module 3 |
 
 ---
 
