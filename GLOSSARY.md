@@ -36,6 +36,30 @@ Continuous control message: controller number + value 0–127, sent repeatedly w
 `CC 74` = first knob (brightness/timbre), `CC 1` = mod strip.
 (`CC` = mensagem de controle contínuo; um valor por passo do movimento.)
 
+## Aftertouch
+
+Pressure applied *after* the key is already down; a continuous message while you lean on the key.
+The MiniLab 3 does **not** send it. (`aftertouch` = pressão depois de apertar; este teclado não tem.)
+
+## SoundFont (.sf2)
+
+A file that packages recordings (samples) of real instruments plus the rules for playing them:
+which sample answers each note, which sample layer answers each velocity range, loop points,
+envelopes. It is the instrument, stored as data. `fluidsynth` plays `.sf2` files.
+(`SoundFont` = arquivo com amostras de instrumentos + regras de disparo; é o instrumento em forma de dado.)
+
+## General MIDI (GM)
+
+Standard that fixes which instrument sits at each program number (0 = acoustic piano, 33 = finger
+bass, …), so the same MIDI file sounds roughly the same on any GM device.
+(`General MIDI` = padrão que fixa o instrumento de cada número, para o mesmo arquivo soar parecido em qualquer aparelho.)
+
+## Sample (amostra)
+
+A short recording of a real sound, replayed at different pitches. A piano note at C2 and at C6 are
+usually two different samples, not one stretched.
+(`sample` = gravação curta de um som real, reproduzida em alturas diferentes.)
+
 ## Pitch bend
 
 The pitch strip message. Signed value from -8192 to +8191, centered on **0** (as shown by `aseqdump`).
