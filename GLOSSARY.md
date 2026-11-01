@@ -41,6 +41,16 @@ Continuous control message: controller number + value 0–127, sent repeatedly w
 Pressure applied *after* the key is already down; a continuous message while you lean on the key.
 The MiniLab 3 does **not** send it. (`aftertouch` = pressão depois de apertar; este teclado não tem.)
 
+## VSTi (instrumento virtual)
+
+Plugin que gera som a partir de MIDI (`.vst3`/`.so` no Linux, ou um SoundFont tocado pelo fluidsynth).
+É a caixa onde o som nasce. (`VSTi` = instrumento virtual; quem transforma receita em som.)
+
+## Program change
+
+Mensagem "troque o instrumento do canal X pelo número Y". No mapa General MIDI, `40` = violino.
+No shell do fluidsynth: `prog 0 40` = canal 0, instrumento 40. (`program change` = troca de instrumento.)
+
 ## SoundFont (.sf2)
 
 A file that packages recordings (samples) of real instruments plus the rules for playing them:
