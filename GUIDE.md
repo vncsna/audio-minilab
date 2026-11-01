@@ -181,6 +181,9 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
 _(free space — questions, music references, track ideas)_
 
+- 2026-11-01 — asked how to learn chords on the controller "like a piano" (interest in module 4;
+  deferred because the daily cap was already hit and recording MIDI — module 2 — is the prerequisite).
+
 ---
 
 ## Update rules for this document
