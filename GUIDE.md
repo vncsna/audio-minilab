@@ -10,10 +10,10 @@
 
 | Field | Value |
 |---|---|
-| **Progress** | `4 / 18` lessons |
+| **Progress** | `5 / 18` lessons |
 | **Level** | 0 — starting from scratch |
-| **Last session** | 2026-11-01 — lesson 1.2 (velocity, aftertouch, CC) + first sound through fluidsynth |
-| **Next lesson** | **1.3 — MIDI is not audio** |
+| **Last session** | 2026-11-01 — lesson 1.3 (MIDI ≠ audio; same notes became violin via `prog 0 40`) |
+| **Next lesson** | **2.1 — Configure Reaper** |
 | **Blockers** | none |
 | **Final goal** | compose, mix, and export 1 original track (~3 min), on your own |
 
@@ -69,10 +69,16 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
   - **Note:** the auditory part of the criterion needs a sound source, which did not exist yet — it
     was deferred to the first sound (fluidsynth demo) instead of pretending it was heard.
 
-- [ ] **1.3 — MIDI is not audio**
+- [x] **1.3 — MIDI is not audio**
   - **Concept:** MIDI describes *what to play*; the sound comes from a virtual instrument (VSTi).
   - **Exercise:** draw (on paper/in your head) the chain: MiniLab → Reaper → VSTi → speaker.
   - **Criterion:** you know that changing the instrument changes the sound without changing the MIDI.
+  - **Findings (verified):** in the running fluidsynth shell, `prog 0 40` (program change on channel 0)
+    turned the same key press into a violin — the MIDI events stayed identical. The student judged
+    the result ugly, which is itself the lesson: FluidR3 is a ~140 MB General MIDI bank, so sustained
+    instruments have few seconds of looped sample and no bow/vibrato/expression (CC 11) control, while
+    percussive instruments (piano) survive sampling well. Better samples, not different MIDI, is what
+    fixes the sound — this is the motivation for choosing native VSTi in module 2.
 
 ### Module 2 — First sound in Reaper (2 lessons)
 
@@ -167,6 +173,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 | 2026-10-31 | 1.1 | Mapped the surface with `aseqdump`: 12 semitones per octave, `Shift`+`Octave` = transpose, `Shift`+arp = arpeggiator, `Shift`+pad 2 = pad bank (`CC 27`). Verified pad 1 = note 44 in bank B and 36 in bank A; pads send on channel 9, keys on channel 0 | Arp pattern looked like a repeated held triad with identical velocities; definitive on/off comparison deferred to module 3 |
 | 2026-11-01 | 1.2 | Played note 48 at 20 different forces: the note never changed, velocity stayed 76–127 (curve compressed at the top); confirmed the keys send **no** aftertouch; distinguished note events from continuous CC streams (74 = knob 1, 82 = second control) | Criterion asks about a *sound* difference and the system still has no sound source; answered from the numbers, hearing deferred to the fluidsynth demo |
 | 2026-11-01 | 1.2 (hearing) | Optional demo outside the roadmap: installed `soundfont-fluid`, started `fluidsynth -a pulseaudio -m alsa_seq` and wired the keyboard with `aconnect 16:0 → FLUID Synth`. Heard the same note at velocity ~76 and 127 (quiet/dull vs loud/bright) and confirmed the GM piano ignores knob 1's CC 74 | — |
+| 2026-11-01 | 1.3 | Drew the chain MiniLab → REAPER → VSTi → speaker; in the fluidsynth shell ran `prog 0 40` and heard the same notes as violin (judged ugly — GM bank limits, no sustained-instrument expression); answered that the VSTi is where sound is born | — |
 
 ---
 
