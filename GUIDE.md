@@ -10,10 +10,10 @@
 
 | Field | Value |
 |---|---|
-| **Progress** | `3 / 18` lessons |
+| **Progress** | `4 / 18` lessons |
 | **Level** | 0 — starting from scratch |
-| **Last session** | 2026-10-31 — lessons 0.1, 0.2 and 1.1 (diagnostics, live MIDI messages, hardware map) |
-| **Next lesson** | **1.2 — What velocity, aftertouch, and CC are** |
+| **Last session** | 2026-11-01 — lesson 1.2 (velocity, aftertouch, CC) + first sound through fluidsynth |
+| **Next lesson** | **1.3 — MIDI is not audio** |
 | **Blockers** | none |
 | **Final goal** | compose, mix, and export 1 original track (~3 min), on your own |
 
@@ -58,10 +58,16 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
     and 44–51 (bank B); keys send on channel 0; button presses appear as `CC 105–109` at 127/0;
     `Shift` also produces Arturia SysEx (`F0 00 20 6B …`).
 
-- [ ] **1.2 — What velocity, aftertouch, and CC are**
+- [x] **1.2 — What velocity, aftertouch, and CC are**
   - **Concept:** velocity = intensity; aftertouch = pressure after pressing; CC = continuous control.
   - **Exercise:** play the same note soft and hard and compare the velocity number in `aseqdump`.
   - **Criterion:** you can explain why the same note "sounds different" depending on force.
+  - **Findings (verified):** note 48 kept its identity while velocity ranged 76–127 — the curve is
+    compressed at the top, so "very soft" already lands near 76; the MiniLab 3 sends **no
+    aftertouch** (nothing between `note on` and `note off`); knobs send their own CCs (74 = knob 1,
+    82 = second control); `CC 9` and `CC 71` at startup are housekeeping, not performance data.
+  - **Note:** the auditory part of the criterion needs a sound source, which did not exist yet — it
+    was deferred to the first sound (fluidsynth demo) instead of pretending it was heard.
 
 - [ ] **1.3 — MIDI is not audio**
   - **Concept:** MIDI describes *what to play*; the sound comes from a virtual instrument (VSTi).
@@ -159,6 +165,8 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 | 2026-10-31 | 0.1 | Identified the keyboard as ALSA client 16 with 4 ports (0–3); learned `cat /proc/asound/seq/clients` and `pw-link -o \| grep -i minilab`; mapped the role of `MIDI`, `DIN THRU`, `MCU/HUI`, `ALV` | — |
 | 2026-10-31 | 0.2 | Installed `alsa-utils` and used `aseqdump -p 16:0`; saw note on/off with velocity (60 soft vs 96–99 hard), CC 74 from the first knob, CC 1 from the mod strip, and pitch bend centered on 0; distinguished discrete events from continuous streams | — |
 | 2026-10-31 | 1.1 | Mapped the surface with `aseqdump`: 12 semitones per octave, `Shift`+`Octave` = transpose, `Shift`+arp = arpeggiator, `Shift`+pad 2 = pad bank (`CC 27`). Verified pad 1 = note 44 in bank B and 36 in bank A; pads send on channel 9, keys on channel 0 | Arp pattern looked like a repeated held triad with identical velocities; definitive on/off comparison deferred to module 3 |
+| 2026-11-01 | 1.2 | Played note 48 at 20 different forces: the note never changed, velocity stayed 76–127 (curve compressed at the top); confirmed the keys send **no** aftertouch; distinguished note events from continuous CC streams (74 = knob 1, 82 = second control) | Criterion asks about a *sound* difference and the system still has no sound source; answered from the numbers, hearing deferred to the fluidsynth demo |
+| 2026-11-01 | 1.2 (hearing) | Optional demo outside the roadmap: installed `soundfont-fluid`, started `fluidsynth -a pulseaudio -m alsa_seq` and wired the keyboard with `aconnect 16:0 → FLUID Synth`. Heard the same note at velocity ~76 and 127 (quiet/dull vs loud/bright) and confirmed the GM piano ignores knob 1's CC 74 | — |
 
 ---
 
