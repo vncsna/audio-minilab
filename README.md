@@ -13,6 +13,7 @@ A personal 1:1 course on the Arturia MiniLab 3 and music production, taught by a
 | `AGENTS.md` | Course rules: environment, teaching method, pacing, file conventions |
 | `course/GUIDE.md` | Roadmap, current progress, session log, student notes |
 | `course/GLOSSARY.md` | Translated terms (English ↔ Portuguese) |
+| `configs/` | REAPER and MiniLab 3 settings that live outside the repo (keymap + manual steps) |
 
 ## Progress
 
