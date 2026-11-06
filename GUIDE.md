@@ -10,10 +10,10 @@
 
 | Field | Value |
 |---|---|
-| **Progress** | `5 / 18` lessons |
-| **Level** | 0 — starting from scratch |
-| **Last session** | 2026-11-01 — lesson 1.3 (MIDI ≠ audio; same notes became violin via `prog 0 40`) |
-| **Next lesson** | **2.1 — Configure Reaper** |
+| **Progress** | `7 / 18` lessons |
+| **Level** | 3 — MIDI recorded into Reaper; Surge XT provides the sound |
+| **Last session** | 2026-11-06 — lesson 2.2 (first MIDI item recorded with Surge XT) |
+| **Next lesson** | **3.1 — Drums with the pads** |
 | **Blockers** | none |
 | **Final goal** | compose, mix, and export 1 original track (~3 min), on your own |
 
@@ -82,17 +82,35 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
 ### Module 2 — First sound in Reaper (2 lessons)
 
-- [ ] **2.1 — Configure Reaper**
+- [x] **2.1 — Configure Reaper**
   - **Concept:** MIDI input, audio device, buffer, and latency.
   - **Exercise:** `Options → Preferences → MIDI Devices`: enable `Minilab3: MIDI (capture)`.
     Check `Audio → Device` (ALSA/JACK) and play with comfortable latency.
   - **Criterion:** key light on the track = immediate sound, no double trigger, no annoying delay.
+  - **Findings (verified):** the Reaper side of the chain works. `Minilab3: MIDI` enabled as
+    `Enabled+Control`; `MCU/HUI`, `DIN THRU` and `ALV` left disabled (they cause double triggers);
+    audio system **JACK** (served by `pipewire-jack`), 48 kHz / 256 samples ≈ 5.3 ms per block
+    ≈ 10.6 ms round trip. Armed track with `Input: MIDI → Minilab3: MIDI → All channels` gave one
+    meter pulse per key, and `aseqdump` showed one `Note on`/`Note off` pair per press.
+  - **Note:** the "immediate sound" half of the criterion cannot be verified before an instrument
+    exists; it was replaced by "one pulse per key, 48 kHz / 256" and the sound test moved to 2.2.
+  - **Concept learned along the way:** *arm* ≠ *recording* — arming opens the input, shows the
+    meter, and marks the track as the one that will record; the transport Record is what writes.
 
-- [ ] **2.2 — First recorded note**
+- [x] **2.2 — First recorded note**
   - **Concept:** armed track + `Record: input (audio or MIDI)` + monitoring.
   - **Exercise:** insert a VSTi (Surge XT, Vital, or Dexed), record 4 bars of loose notes,
     and see the events in the MIDI Editor.
   - **Criterion:** there is a MIDI item with your notes in the project.
+  - **Findings (verified):** `surge-xt` installed; Reaper only listed the **CLAPi** build, not the
+    VST3 one — it scans `/usr/lib/clap` but not `/usr/lib/vst3` (adding that path in
+    `Preferences → Plug-ins → VST` is optional, CLAP works fine). Default patch is `Init Saw`
+    (raw sawtooth) and was rejected as unpleasant; `Keys → Soft Suitcase` was used instead.
+    Tempo set to 100 BPM via `Insert → Tempo/Time Signature Marker…` because the student did not
+    know the transport panel. Recorded ~4 bars (~9.6 s) and confirmed the notes in the MIDI Editor
+    sit where they were played.
+  - **Note:** the student did not identify the transport bar from the name; describe UI by the
+    buttons (`▶ ■ ●`) rather than by Reaper's terminology.
 
 ### Module 3 — Rhythm: pads and drums (2 lessons)
 
@@ -174,6 +192,8 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 | 2026-11-01 | 1.2 | Played note 48 at 20 different forces: the note never changed, velocity stayed 76–127 (curve compressed at the top); confirmed the keys send **no** aftertouch; distinguished note events from continuous CC streams (74 = knob 1, 82 = second control) | Criterion asks about a *sound* difference and the system still has no sound source; answered from the numbers, hearing deferred to the fluidsynth demo |
 | 2026-11-01 | 1.2 (hearing) | Optional demo outside the roadmap: installed `soundfont-fluid`, started `fluidsynth -a pulseaudio -m alsa_seq` and wired the keyboard with `aconnect 16:0 → FLUID Synth`. Heard the same note at velocity ~76 and 127 (quiet/dull vs loud/bright) and confirmed the GM piano ignores knob 1's CC 74 | — |
 | 2026-11-01 | 1.3 | Drew the chain MiniLab → REAPER → VSTi → speaker; in the fluidsynth shell ran `prog 0 40` and heard the same notes as violin (judged ugly — GM bank limits, no sustained-instrument expression); answered that the VSTi is where sound is born | — |
+| 2026-11-06 | 2.1 | Configured Reaper: `Minilab3: MIDI` enabled as input (MCU/HUI, DIN THRU and ALV kept off), audio system JACK over PipeWire at 48 kHz / 256 samples (~10.6 ms round trip), armed a track with `Input: MIDI → Minilab3 → All channels`; one meter pulse per key and one `Note on`/`Note off` pair in `aseqdump`; clarified that arm ≠ recording | Criterion's "immediate sound" deferred to 2.2 (no instrument installed); 2.2 needs `paru -S surge-xt` |
+| 2026-11-06 | 2.2 | Installed `surge-xt` and inserted it as **CLAPi** (Reaper listed the CLAP build only, not the VST3 one); rejected the default `Init Saw` and switched to `Keys → Soft Suitcase`; set 100 BPM through `Insert → Tempo/Time Signature Marker…`; recorded ~4 bars with input monitoring on and confirmed the notes sit where they were played | Reaper's scan paths cover `/usr/lib/clap` but not `/usr/lib/vst3` (harmless, CLAP works); the student did not recognize the transport bar by name |
 
 ---
 

@@ -16,7 +16,7 @@ A personal 1:1 course on the Arturia MiniLab 3 and music production, taught by a
 
 ## Progress
 
-`5 / 18` lessons — end of Module 1 (MIDI and the MiniLab 3). Next: **2.1 — Configure Reaper**.
+`7 / 18` lessons — end of Module 2 (first MIDI recorded in REAPER with Surge XT). Next: **3.1 — Drums with the pads**.
 
 ## How it works
 
