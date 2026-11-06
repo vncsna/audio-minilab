@@ -20,7 +20,7 @@ A personal 1:1 course on the Arturia MiniLab 3 and music production, taught by a
 
 ## How it works
 
-- One lesson per session, at most 2 per day (only 1 practical).
+- One lesson per session.
 - Every lesson has one concept, one exercise, and an explicit completion criterion.
 - `GUIDE.md` is updated at the end of every session and is the single source of truth for progress.
 
