@@ -17,7 +17,7 @@ A personal 1:1 course on the Arturia MiniLab 3 and music production, taught by a
 
 ## Progress
 
-`7 / 18` lessons — end of Module 2 (first MIDI recorded in REAPER with Surge XT). Next: **3.1 — Drums with the pads**.
+`8 / 18` lessons — a drum groove recorded with the pads. Next: **3.2 — Grid, quantization, and humanization**.
 
 ## How it works
 
