@@ -3,31 +3,26 @@
 Settings that live outside any config file, kept here so the setup can be rebuilt on a fresh
 machine. Version-specific: REAPER 7.84, Arch Linux, PipeWire.
 
-### Install the transport shortcuts
+### Transport (MCU)
 
-```bash
-cp configs/Minilab3.ReaperKeyMap ~/.config/REAPER/KeyMaps/
-```
-
-Then `Actions → Show action list → Import/export… → Import shortcuts…` and pick the file.
-Format: `KEY <modifier> <cc> <action> 0`, where modifier `176` = MIDI CC on channel 1.
-
-| MiniLab control | Message | Action | REAPER command |
-|---|---|---|---|
-| `Shift` + pad 4 | CC 105 | Toggle repeat (loop) | 1068 |
-| `Shift` + pad 5 | CC 106 | Stop | 1016 |
-| `Shift` + pad 6 | CC 107 | Play/pause | 40073 |
-| `Shift` + pad 7 | CC 108 | Record | 1013 |
-
-The controller must be in **DAW** mode (`Shift` + pad 3 until the display reads `DAW`);
-in ARTURIA mode the transport pads send nothing.
+- Hardware: in the WebMIDI configurator (`minilab3.klangsoft.com`), set **Transport mode → MCU**.
+  With `None`, `Shift` + pads 4–7 send plain `CC 105–108` on the `MIDI` port with 127 on press
+  and 0 on release; REAPER shortcuts fire on both, so toggle actions undo themselves.
+- The controller must be in **DAW** mode (`Shift` + pad 3 until the display reads `DAW`).
+- `Preferences → Control/OSC/web → Add`: **Mackie Control Universal**, MIDI input and output
+  `Minilab3: MCU/HUI`. Only one MCU surface in the list.
+- No MIDI CC shortcuts for the transport (`KEY 176 …` in `reaper-kb.ini`), or the transport
+  double-triggers.
+- Close Chrome (WebMIDI) and any `aseqdump` before starting REAPER; the launches that stopped
+  before initialising audio coincided with both holding the MiniLab ports (suspected, not proven).
 
 ### MIDI devices
 
 - `Minilab3: MIDI` — both checkboxes: **Enable input for track record input** and
   **Enable input for control messages**. The second one is required for MIDI action shortcuts;
   without it REAPER silently drops the message.
-- `MCU/HUI`, `DIN THRU`, `ALV` — input disabled (they cause double triggers).
+- `MCU/HUI`, `DIN THRU`, `ALV` — input disabled (they cause double triggers). The MCU surface
+  opens `MCU/HUI` by itself.
 
 ### Audio
 
