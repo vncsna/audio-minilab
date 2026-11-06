@@ -52,8 +52,9 @@ When a lesson needs a package, give the exact `paru` command and let the student
 | File | Purpose | Written by |
 |---|---|---|
 | `AGENTS.md` | course rules, environment, method | agent |
-| `GUIDE.md` | roadmap + objective progress ("where I am") | agent updates |
-| `GLOSSARY.md` | translated terms | agent (create when needed) |
+| `course/GUIDE.md` | roadmap + objective progress ("where I am") | agent updates |
+| `course/GLOSSARY.md` | translated terms | agent (create when needed) |
+| `configs/` | REAPER/MiniLab settings that live outside the repo | agent (when a setting is decided) |
 
 ## File rules
 
