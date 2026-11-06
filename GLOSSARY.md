@@ -39,7 +39,22 @@ Continuous control message: controller number + value 0–127, sent repeatedly w
 ## Aftertouch
 
 Pressure applied *after* the key is already down; a continuous message while you lean on the key.
-The MiniLab 3 does **not** send it. (`aftertouch` = pressão depois de apertar; este teclado não tem.)
+The MiniLab 3's **keys send none**, but its **pads send polyphonic aftertouch** (each pad reports its
+own pressure). A sampler ignores it; it matters only when an instrument maps pressure to modulation.
+(`aftertouch` = pressão depois de apertar; as teclas não mandam, os pads mandam — um por pad.)
+
+## Velocity curve
+
+How physical force is translated into MIDI velocity 1–127: `linear` (1:1), `exponential` (harder in the
+middle), `logarithmic` (light touch already sends high velocity), `fixed` (always the same value).
+On the MiniLab 3 it lives in the hardware, per group (keys / pads), not in the DAW.
+(`curva de velocity` = relação entre a força da batida e o número MIDI enviado.)
+
+## GM drum map
+
+Fixed note numbers for drum pieces on MIDI channel 10: 36 kick, 38 snare, 42 closed hat, 46 open hat,
+49 crash, 51 ride. It is why pad 1 plays a kick without any configuration.
+(`mapa GM de bateria` = números de nota fixos para cada peça, no canal 10.)
 
 ## VSTi (instrumento virtual)
 

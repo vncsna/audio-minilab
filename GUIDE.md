@@ -10,11 +10,11 @@
 
 | Field | Value |
 |---|---|
-| **Progress** | `7 / 18` lessons |
-| **Level** | 3 — MIDI recorded into Reaper; Surge XT provides the sound |
-| **Last session** | 2026-11-06 — lesson 2.2 (first MIDI item recorded with Surge XT) |
-| **Next lesson** | **3.1 — Drums with the pads** |
-| **Blockers** | none |
+| **Progress** | `8 / 18` lessons |
+| **Level** | 4 — a drum groove recorded with a GM kit; timing still needs the grid |
+| **Last session** | 2026-11-06 — lesson 3.1 (2-bar drum groove with the pads) |
+| **Next lesson** | **3.2 — Grid, quantization, and humanization** |
+| **Blockers** | Reaper's metronome produces no click (settings checked, cause open); the student used a phone click. Groove recorded slightly off the beat — the target of 3.2 |
 | **Final goal** | compose, mix, and export 1 original track (~3 min), on your own |
 
 **How to resume:** read this block → find the next lesson in the roadmap → do only that one.
@@ -114,10 +114,16 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 
 ### Module 3 — Rhythm: pads and drums (2 lessons)
 
-- [ ] **3.1 — Drums with the pads**
+- [x] **3.1 — Drums with the pads**
   - **Concept:** General MIDI note map (kick 36, snare 38, closed hat 42…).
   - **Exercise:** record a 2-bar groove (kick/snare/hat) using the pads.
   - **Criterion:** the groove is in time, with at least 3 pieces.
+  - **Findings (verified):** no drum instrument existed; `surge-xt` only ships single-hit drum patches (one sound per preset), so `avldrums.lv2` was installed instead — it carries five complete GM kits as `.sf2` (Black Pearl 4, Red Zeppelin 4, Blonde Bop, Buskman's Holiday) and exposes them as an LV2 instrument, which Reaper loads natively from `/usr/lib/lv2`.
+  - **Root cause of the silence (verified with `fluidsynth`):** the Black Pearl `.sf2` has **no drum preset on bank 128** (`No preset found on channel 9 [bank=128 prog=0]`). The pads send on MIDI channel 10, which always looks for bank 128 → empty → silence; keys on channel 1 use preset 0, the kit mapped by note number, which is why keys sounded and pads did not.
+  - **Fix:** remap the pad channel to 1 in front of the plugin — `IX → MIDI Tool II` inserted *before* `AVL Drums`, `Input Channel 10`, `Output Channel 1`. (Reaper's `Map input to channel` in the input menu did not take effect.)
+  - **Pad feel:** pad velocity curve lives in the hardware, not in Reaper. With no MCC on Linux, it was set through the community WebMIDI configurator `minilab3.klangsoft.com` in Chrome: `Velocity Curves → Pad → Log` (light hits translate to higher velocity) or `Fixed` for finger-drumming consistency.
+  - **Also learned:** pad aftertouch (polyphonic) exists on the MiniLab 3 but is irrelevant for a sampler — it only matters with instruments that use pressure as modulation.
+  - **Note:** the criterion's "in time" half was met only approximately; the student judged the hi-hat slightly off the click. Rather than repeat the take, human timing inaccuracy became the motivation for 3.2.
 
 - [ ] **3.2 — Grid, quantization, and humanization**
   - **Concept:** quantize = align to the grid; 100% sounds robotic.
@@ -194,6 +200,7 @@ Legend: `[ ]` pending · `[~]` in progress · `[x]` done
 | 2026-11-01 | 1.3 | Drew the chain MiniLab → REAPER → VSTi → speaker; in the fluidsynth shell ran `prog 0 40` and heard the same notes as violin (judged ugly — GM bank limits, no sustained-instrument expression); answered that the VSTi is where sound is born | — |
 | 2026-11-06 | 2.1 | Configured Reaper: `Minilab3: MIDI` enabled as input (MCU/HUI, DIN THRU and ALV kept off), audio system JACK over PipeWire at 48 kHz / 256 samples (~10.6 ms round trip), armed a track with `Input: MIDI → Minilab3 → All channels`; one meter pulse per key and one `Note on`/`Note off` pair in `aseqdump`; clarified that arm ≠ recording | Criterion's "immediate sound" deferred to 2.2 (no instrument installed); 2.2 needs `paru -S surge-xt` |
 | 2026-11-06 | 2.2 | Installed `surge-xt` and inserted it as **CLAPi** (Reaper listed the CLAP build only, not the VST3 one); rejected the default `Init Saw` and switched to `Keys → Soft Suitcase`; set 100 BPM through `Insert → Tempo/Time Signature Marker…`; recorded ~4 bars with input monitoring on and confirmed the notes sit where they were played | Reaper's scan paths cover `/usr/lib/clap` but not `/usr/lib/vst3` (harmless, CLAP works); the student did not recognize the transport bar by name |
+| 2026-11-06 | 3.1 | Installed `avldrums.lv2` (5 GM kits as `.sf2`) and loaded `Black Pearl 4`; diagnosed silence with `fluidsynth` (no bank-128 preset → channel 10 empty) and remapped pads with `IX → MIDI Tool II` (input 10 → output 1) before the plugin; set the pad velocity curve to `Log` through the WebMIDI configurator, since MCC has no Linux build; recorded a 2-bar kick/snare/hat groove | Reaper's metronome gives no click (`Metronome output`, run-during-playback/recording all checked) — student used a phone click; groove is slightly off the grid, deferred to 3.2 |
 
 ---
 
